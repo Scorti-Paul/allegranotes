@@ -1,21 +1,63 @@
-import { FC, useState } from "react";
+import { FC, Suspense, useCallback, useEffect, useState } from "react";
 import { FunnelIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
-import Modal from "../../../components/Modal";
 import { useQuery } from "react-query";
 import { get } from "../../../api";
 import { MoonLoader } from "react-spinners";
 import { BriefcaseIcon, CalendarIcon } from "@heroicons/react/24/solid"
 import moment from "moment";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { EyeIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import ViewNote from "./components/view";
+import TopLoader from "components/loaders/top";
+import { toast } from "react-toastify";
+import { deleteNote } from "api/mutations/notes";
 
 const Notes: FC<{}> = () => {
-  const [showView, setShowView] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selected, setSelected] = useState<any>({});
+  const [, setLoading] = useState(false);
+  const [note, setNote] = useState([])
+  const navigate = useNavigate();
 
   const { data, isFetching } = useQuery(["noteList"], () =>
     get("/notes")
   );
 
-  console.log(data)
+  useEffect(() => {
+    setNote(data?.data)
+  }, [data])
+
+  const invokeDeleteNote = (itemId: string) => {
+    setLoading(true);
+    deleteNote(itemId)
+      .then((response) => {
+        setLoading(false);
+        toast.success(response?.message);
+        setNote(note.filter((note: any) => note._id !== itemId))
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message);
+        setLoading(false);
+      });
+  };
+
+  const toggleShowModal = useCallback(
+    (e: React.MouseEvent, idx: number) => {
+      e?.preventDefault();
+      setSelected(note[idx])
+      setShowModal(!showModal);
+    },
+    [note, showModal]
+  );
+
+  const updateNote = useCallback(
+    (e: React.MouseEvent, idx: number, note: any) => {
+      e?.preventDefault();
+      setSelected(note[idx])
+      navigate("update-note", { state: note });
+    },
+    [navigate]
+  );
 
   return (
     <>
@@ -39,7 +81,6 @@ const Notes: FC<{}> = () => {
               >
                 <span>
                   <FunnelIcon className="transition-all ease-in-out delay-150 duration-700 w-14 p-4 hover:bg-indigo-400 text-indigo-600 rounded-full" />
-                  {/* <PlusCircleIcon className="transition-all ease-in-out delay-150 duration-700 w-16 hover:bg-indigo-400 text-indigo-600 rounded-full" /> */}
                 </span>
               </Link>
             </div>
@@ -71,16 +112,18 @@ const Notes: FC<{}> = () => {
                       <div className="sm:grid sm:grid-cols-3 md:grid-ro md:mb-5 gap-6">
 
                         {
-                          data?.data?.map((note: any, idx: any) => (
+                          note?.map((note: any, idx: any) => (
                             <div key={idx} className="border border-indigo-100 p-6 bg-white rounded-xl">
-                              <div className="mb-5">
+                              <div className="mb-5 flex justify-between">
                                 <BriefcaseIcon className="w-14 text-indigo-500 border-2 border-indigo-500 p-2 rounded-2xl" />
-                                <div>
-
+                                <div className="flex">
+                                  <EyeIcon className="w-8 p-1 text-indigo-500 hover:text-indigo-400 hover:cursor-pointer" onClick={(e) => toggleShowModal(e, idx)} />
+                                  <PencilSquareIcon className="w-8 p-1 text-slate-500 hover:text-slate-400 hover:cursor-pointer" onClick={(e) => updateNote(e, idx, note)} />
+                                  <TrashIcon className="w-8 p-1 text-red-400 hover:text-red-300 hover:cursor-pointer" onClick={() => invokeDeleteNote(note._id)} />
                                 </div>
                               </div>
                               <h3 className="text-2xl text-[#2D3748] mb-3">{note.title}</h3>
-                              <p className="text-[#6E7D94] mb-4">{note.content}</p>
+                              <p className="text-[#6E7D94] mb-4 line-clamp-3">{note.content}</p>
                               <div className="flex gap-2 items-center">
                                 <CalendarIcon className="w-6 text-indigo-400" />
                                 <small className="text-indigo-900"><strong className="text-indigo-400">Joined on:</strong> {moment(note.createdAt).format("MMM DD, YYYY")}</small>
@@ -98,11 +141,13 @@ const Notes: FC<{}> = () => {
           )}
         </div>
       </div>
-      {/* View single product */}
+      {/* View single note */}
       <>
-        <Modal show={showView} setShow={setShowView}>
-          {/* <ViewNote selected={selected} /> */}ksdl
-        </Modal>
+        <Suspense fallback={<TopLoader />}>
+          <div className="flex justify-center ml-10">
+            <ViewNote show={showModal} setShow={setShowModal} selected={selected} />
+          </div>
+        </Suspense>
       </>
     </>
   );
