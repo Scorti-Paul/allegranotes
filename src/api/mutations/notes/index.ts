@@ -7,3 +7,7 @@ export const createNote = async (body: any) => {
 export const updateNote = async (body: any) => {
   return await put("note/update", { ...body });
 };
+
+export const deleteNote = async (body: any) => {
+  return await put("note/delete", { ...body });
+};
