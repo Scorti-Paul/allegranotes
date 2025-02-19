@@ -15,7 +15,8 @@ import { Link, Navigate, Outlet, useLocation } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Header from "components/Header";
 import Button from "components/Buttons/button";
-// import logo from "./../../assets/logo.png";
+import logo from "../../assets/logo.png"
+import Logo from "components/Logo";
 // import logo1 from "/logo.png";
 
 const navigation = [
@@ -119,9 +120,10 @@ export default function Layout() {
                       <div className="flex flex-shrink-0 items-center px-4">
                         <img
                           className="h-8 w-auto"
-                          src="/public/logo.png"
+                          src={logo}
                           alt="allegro logo"
                         />
+                        <Logo />
                       </div>
                       <nav className="mt-5 space-y-1 px-2">
                         {navigation.map((item) => (
@@ -143,6 +145,7 @@ export default function Layout() {
                               aria-hidden="true"
                             />
                             {item.name}
+                            <Logo />
                           </Link>
                         ))}
                       </nav>
@@ -156,9 +159,10 @@ export default function Layout() {
                           <div>
                             <img
                               className="inline-block h-10 w-10 rounded-full"
-                              src='/public/logo.png'
+                              src={logo}
                               alt="allegro logo"
                             />
+                            <Logo />
                           </div>
                           <div className="ml-3">
                             <p className="text-base font-medium text-white">
@@ -192,7 +196,6 @@ export default function Layout() {
             <div className="flex min-h-0 flex-1 flex-col bg-[#F8F9FA]">
               <div className="flex flex-1 flex-col overflow-y-auto pt-5 pb-4">
                 <div className="flex flex-shrink-0 items-center px-4">
-                  {/* <img className="h-9 w-auto" src={logo} alt="Farmercom LTD" /> */}
                 </div>
                 <nav className="mt-5 flex-1 space-y-1 px-2">
                   {navigation.map((item) => (
@@ -228,6 +231,7 @@ export default function Layout() {
                           src={user?.image}
                           alt={user?.name}
                         />
+
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium text-white">
