@@ -2,18 +2,14 @@ import { FC } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "pages/auth/login";
 import Register from "../pages/auth/register";
-// import Dashboard from "../pages/main/dashboard";
 import Layout from "./layout";
-// import Settings from "../pages/main/settings";
-// import UpdateUser from "pages/main/users/components/updateuser";
 // import UserProfile from "pages/main/users/components/userprofile";
-// import CreateNote from "pages/main/note/components/createnote";
-// import UpdateNote from "pages/main/note/components/updatenote";
 import Notes from "pages/main/notes";
 import PageNotFound from "pages/pagenotfound";
 import Category from "pages/main/category/category";
 import Tags from "pages/main/tag/tag";
 import CreateNote from "pages/main/notes/components/createnote";
+import UpdateNote from "pages/main/notes/components/update";
 
 const router = createBrowserRouter([
   {
@@ -40,14 +36,10 @@ const router = createBrowserRouter([
         path: "/tags",
         element: <Tags />,
       },
-      // {
-      //   path: "/note/update-note",
-      //   element: <UpdateProduce />,
-      // },
-      // {
-      //   path: "users/update-user",
-      //   element: <UpdateUser />,
-      // },
+      {
+        path: "/notes/update-note",
+        element: <UpdateNote />,
+      },
       // {
       //   path: "users/user/profile",
       //   element: <UserProfile />,
