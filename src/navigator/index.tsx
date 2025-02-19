@@ -11,32 +11,35 @@ import Layout from "./layout";
 // import UpdateNote from "pages/main/note/components/updatenote";
 import Notes from "pages/main/notes";
 import PageNotFound from "pages/pagenotfound";
-// import ForgotPassword from "pages/auth/forgot";
-// import ResetPassword from "pages/auth/reset";
-// import Category from "pages/main/category/category";
-// import Tag from "pages/main/tag/tag";
+import Category from "pages/main/category/category";
+import Tags from "pages/main/tag/tag";
+import CreateNote from "pages/main/notes/components/createnote";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      // {
-      //   path: "/",
-      //   element: <Dashboard />,
-      // },
-      // {
-      //   path: "/dashboard",
-      //   element: <Dashboard />,
-      // },
       {
-        path: "notes",
+        path: "/",
         element: <Notes />,
       },
-      // {
-      //   path: "createnote",
-      //   element: <CreateNote />,
-      // },
+      {
+        path: "/Notes",
+        element: <Notes />,
+      },
+      {
+        path: "notes/create-note",
+        element: <CreateNote />,
+      },
+      {
+        path: "/categories",
+        element: <Category />,
+      },
+      {
+        path: "/tags",
+        element: <Tags />,
+      },
       // {
       //   path: "/note/update-note",
       //   element: <UpdateProduce />,
