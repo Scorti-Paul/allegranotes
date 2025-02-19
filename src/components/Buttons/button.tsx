@@ -23,14 +23,14 @@ const Button = ({
               onClick={onClick}
               className={`inline-flex w-full justify-center font-medium rounded-md border-0 border-transparent ${disabled
                 ? "text-gray-600 bg-gray-200 cursor-not-allowed"
-                : "bg-primary-500 text-white shadow-sm hover:bg-primary-600"
-                } focus:outline-none sm:col-start-2 sm:text-base transition-all duration-200 px-4 py-3 text-sm ${children}`}
+                : "bg-[#313860] text-white shadow-sm hover:bg-[#313860]"
+                } focus:outline-none sm:col-start-2 sm:text-base transition-all duration-200 px-2 py-4 text-sm ${children}`}
             >
               <div className="flex gap-2 items-center justify-center">
                 {loading && <Loader />}
 
-                <span>{text}</span>
                 {hasIcon && <>{Icon}</>}
+                <span>{text}</span>
               </div>
             </button>
           </>
