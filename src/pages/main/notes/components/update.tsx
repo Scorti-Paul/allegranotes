@@ -39,26 +39,16 @@ const UpdateNote: FC<{}> = () => {
     () => get("/tags")
   );
 
-  // const handleChange = useCallback(
-  //   (e: any) => {
-  //     setNoteData({
-  //       ...noteData,
-  //       [e.target.name]: e.target.value,
-  //     });
-  //   },
-  //   [noteData]
-  // );
-
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (body: any) => {
-      return updateNote({ ...body, id: state?._id });
+      return updateNote( state?._id, { ...body });
     },
     onError: (e) => {
       toast?.error("There was an error");
     },
     onSuccess: () => {
       toast?.success("Note updated successfully");
-      navigate("/note");
+      navigate("/notes");
     },
   });
 
@@ -108,13 +98,49 @@ const UpdateNote: FC<{}> = () => {
     initialCheck();
   }, [initialCheck]);
 
+  
+  const customStyles = {
+    control: (provided: any, state: any) => ({
+      ...provided,
+      border: state.isFocused ? "2px solid #6366F1" : "1px solid #DBD3FF", 
+      borderRadius: "8px",
+      boxShadow: state.isFocused ? "0 0 5px rgba(99, 102, 241, 0.5)" : "none",
+      "&:hover": {
+        borderColor: "#6366F1",
+      },
+      padding: "6px",
+    }),
+    placeholder: (provided: any) => ({
+      ...provided,
+      color: "#7B70AF", 
+      fontStyle: "italic", 
+    }),
+    option: (provided: any, state: any) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? "#6366F1" : state.isFocused ? "#E0E7FF" : "#ffffff",
+      color: state.isSelected ? "#ffffff" : "#7B70AF",
+      padding: "10px",
+      cursor: "pointer",
+    }),
+    menu: (provided: any) => ({
+      ...provided,
+      borderRadius: "8px",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+      overflow: "hidden",
+    }),
+    singleValue: (provided: any) => ({
+      ...provided,
+      color: "#4F46E5", // Indigo
+    }),
+  };
+
   return (
     <>
       <div className="md:mt-4 md:px-12">
         <div className="px-4 sm:px-6 lg:px-8">
           <Header
-            title="Create Note"
-            description="Fill out the details to create new note."
+            title="Update Note"
+            description="Fill out the details to update new note."
           >
             <Button
               Icon={<EyeIcon className="w-4" />}
@@ -133,7 +159,7 @@ const UpdateNote: FC<{}> = () => {
                   <div className="bg-white md:px-16 md:py-12 sm:p-6 sm:block rounded-3xl">
                     <div className="w-full grid grid-cols-6 gap-6">
                       <div className='col-span-3 mt-1'>
-                        <label htmlFor="dentist" className="block text-sm font-medium text-gray-700 mb-1.5">
+                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1.5">
                           Category
                         </label>
                         <Select
@@ -146,6 +172,7 @@ const UpdateNote: FC<{}> = () => {
                           onChange={(e: any) => setSelectedCategory(e?.value)}
                           isMulti={false}
                           name="category"
+                          styles={customStyles}
                           options={categoryData?.data?.map((item: any) => {
                             return {
                               value: item._id,
@@ -156,7 +183,7 @@ const UpdateNote: FC<{}> = () => {
                       </div>
 
                       <div className='col-span-3 mt-1'>
-                        <label htmlFor="dentist" className="block text-sm font-medium text-gray-700 mb-1.5">
+                        <label htmlFor="tag" className="block text-sm font-medium text-gray-700 mb-1.5">
                           Tag
                         </label>
                         <Select
@@ -169,6 +196,7 @@ const UpdateNote: FC<{}> = () => {
                           onChange={(e: any) => setSelectedTag(e?.value)}
                           isMulti={false}
                           name="tag"
+                          styles={customStyles}
                           options={tagData?.data?.map((item: any) => {
                             return {
                               value: item._id,
@@ -210,8 +238,7 @@ const UpdateNote: FC<{}> = () => {
 
                     </div>
                     <div className="w-full flex justify-end">
-                      <div className="w-36 mt-5">
-
+                      <div className="w-40 mt-5">
                         <Button
                           type="primary-btn"
                           path=""
@@ -219,16 +246,11 @@ const UpdateNote: FC<{}> = () => {
                           hasIcon={true}
                           Icon={<ArrowDownOnSquareIcon className="w-6" />}
                           onClick={handleSubmission}
-                          text={"Save Note"}
+                          text={"Update Note"}
                         />
                       </div>
                     </div>
                   </div>
-                  {/* <DoubleButton
-                    loading={isLoading || loading}
-                    buttonText="Save note"
-                    onClick={handleSubmission}
-                  /> */}
                 </div>
               </form>
             </div>

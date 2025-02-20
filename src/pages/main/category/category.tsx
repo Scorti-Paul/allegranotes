@@ -24,18 +24,18 @@ const Category: FC<{}> = () => {
 
   return (
     <>
-      <div className="md:mt-4 md:px-12">
+      <div className="md:px-12">
         <div className="px-4 sm:px-6 lg:px-8">
           <Header
             title="Categories"
-            description="A list of all the categories to help filter products, services and produce."
+            description="A list of all the categories."
           >
-            <AddButton label={"Add New Category"} onClick={toggleShowAdd} />
+            <AddButton onClick={toggleShowAdd} />
           </Header>
           {isFetching ? (
             <div className="h-[30rem] flex justify-center items-center">
               <MoonLoader
-                color="#22C55E"
+                color="#7961E4"
                 loading={isFetching}
                 size={50}
                 aria-label="loading spinner"

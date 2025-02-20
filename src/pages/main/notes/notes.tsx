@@ -1,16 +1,17 @@
 import { FC, Suspense, useCallback, useEffect, useState } from "react";
-import { FunnelIcon, PlusCircleIcon } from "@heroicons/react/20/solid";
+import { PlusIcon } from "@heroicons/react/20/solid";
 import { useQuery } from "react-query";
 import { get } from "../../../api";
 import { MoonLoader } from "react-spinners";
 import { BriefcaseIcon, CalendarIcon } from "@heroicons/react/24/solid"
 import moment from "moment";
 import { Link, useNavigate } from "react-router-dom";
-import { EyeIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, EyeIcon, PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import ViewNote from "./components/view";
 import TopLoader from "components/loaders/top";
 import { toast } from "react-toastify";
 import { deleteNote } from "api/mutations/notes";
+import Header from "components/Header";
 
 const Notes: FC<{}> = () => {
   const [showModal, setShowModal] = useState(false);
@@ -61,43 +62,39 @@ const Notes: FC<{}> = () => {
 
   return (
     <>
-      <div className="md:mt-4 md:px-12">
+      <div className="md:px-12">
         <div className="px-4 sm:px-6 lg:px-8">
-          {/* <Header title="Notes" description="A list of all the notes.">
-            <Button
-              Icon={<PlusCircleIcon className="w-4" />}
-              text={"Add produce"}
-              type={"primary-link"}
-              path={"create-note"}
-              onClick={() => null}
-              hasIcon={true}
-            />
-          </Header> */}
+          <Header
+            title="Notes"
+            description="A list of all the Notes."
+          >
+            <div className="flex gap-4 justify-end items-center">
+              <div className="transition-all ease-in-out delay-150 duration-700">
+                <Link
+                  to="create-note"
+                >
+                  <span className="transition-all ease-in-out delay-150 duration-500 w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-indigo-100 text-white rounded-full">
+                    <AdjustmentsHorizontalIcon className="w-4 md:w-6 text-indigo-600 rounded-full" />
+                  </span>
+                </Link>
+              </div>
+              <div className="transition-all ease-in-out delay-150 duration-700">
+                <Link
+                  to="create-note"
+                >
+                  <span className="transition-all ease-in-out delay-150 duration-500 w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-indigo-500 text-white rounded-full">
+                    <PlusIcon className="w-4 md:w-6 text-white rounded-full" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+          </Header>
 
-          <div className="flex gap-4 justify-end items-center">
-            <div className="transition-all ease-in-out delay-150 duration-700">
-              <Link
-                to="create-note"
-              >
-                <span>
-                  <FunnelIcon className="transition-all ease-in-out delay-150 duration-700 w-14 p-4 hover:bg-indigo-400 text-indigo-600 rounded-full" />
-                </span>
-              </Link>
-            </div>
-            <div className="transition-all ease-in-out delay-150 duration-700">
-              <Link
-                to="create-note"
-              >
-                <span>
-                  <PlusCircleIcon className="transition-all ease-in-out delay-150 duration-700 w-16 hover:bg-indigo-400 text-indigo-600 rounded-full" />
-                </span>
-              </Link>
-            </div>
-          </div>
+
           {isFetching ? (
             <div className="h-[30rem] flex justify-center items-center">
               <MoonLoader
-                color="#22C55E"
+                color="#7961E4"
                 loading={isFetching}
                 size={50}
                 aria-label="loading spinner"
@@ -109,17 +106,17 @@ const Notes: FC<{}> = () => {
                 <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div className="overflow-hidden md:rounded-lg p-1">
-                      <div className="sm:grid sm:grid-cols-3 md:grid-ro md:mb-5 gap-6">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
                         {
                           note?.map((note: any, idx: any) => (
                             <div key={idx} className="border border-indigo-100 p-6 bg-white rounded-xl">
                               <div className="mb-5 flex justify-between">
-                                <BriefcaseIcon className="w-14 text-indigo-500 border-2 border-indigo-500 p-2 rounded-2xl" />
+                                <BriefcaseIcon className="w-12 text-indigo-400 border-[0.005rem] border-indigo-400 p-2 rounded-2xl" />
                                 <div className="flex">
-                                  <EyeIcon className="w-8 p-1 text-indigo-500 hover:text-indigo-400 hover:cursor-pointer" onClick={(e) => toggleShowModal(e, idx)} />
-                                  <PencilSquareIcon className="w-8 p-1 text-slate-500 hover:text-slate-400 hover:cursor-pointer" onClick={(e) => updateNote(e, idx, note)} />
-                                  <TrashIcon className="w-8 p-1 text-red-400 hover:text-red-300 hover:cursor-pointer" onClick={() => invokeDeleteNote(note._id)} />
+                                  <EyeIcon className="w-7 p-1 text-indigo-500 hover:text-indigo-400 hover:cursor-pointer" onClick={(e) => toggleShowModal(e, idx)} />
+                                  <PencilSquareIcon className="w-7 p-1 text-slate-500 hover:text-slate-400 hover:cursor-pointer" onClick={(e) => updateNote(e, idx, note)} />
+                                  <TrashIcon className="w-7 p-1 text-red-400 hover:text-red-300 hover:cursor-pointer" onClick={() => invokeDeleteNote(note._id)} />
                                 </div>
                               </div>
                               <h3 className="text-2xl text-[#2D3748] mb-3">{note.title}</h3>
@@ -132,7 +129,6 @@ const Notes: FC<{}> = () => {
                           ))
                         }
                       </div>
-
                     </div>
                   </div>
                 </div>

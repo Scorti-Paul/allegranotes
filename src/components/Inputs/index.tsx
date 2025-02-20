@@ -1,9 +1,5 @@
 import { InputProps } from "./types";
-import { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-// import DatePicker from "react-datepicker"
-// import moment from "moment";
-// import "react-datepicker/dist/react-datepicker.css";
 
 export default function Input({
   label,
@@ -25,14 +21,6 @@ export default function Input({
   minLength,
   maxLength
 }: InputProps) {
-  const [inputBlur, setInputBlur] = useState(false);
-
-  const handleBlur = (e: any) => {
-    if (optionalLabel === false) {
-      !e.target.value ? setInputBlur(true) : setInputBlur(false);
-    }
-  };
-
   return (
     <>
       {field === "input" ? (
@@ -50,7 +38,7 @@ export default function Input({
           >
             <label
               htmlFor={name}
-              className="block text-base font-medium text-[#7B70AF]"
+              className="block text-base text-[#7B70AF]"
             >
               {label}{" "}
               <span className="mt-2 text-lg text-red-400">{optionalLabel}</span>
@@ -67,7 +55,6 @@ export default function Input({
               id={name}
               value={value}
               onChange={onChange}
-              onBlur={handleBlur}
               required={required}
               disabled={disable}
               autoComplete={autoComplete}
@@ -76,11 +63,9 @@ export default function Input({
               minLength={minLength}
               maxLength={maxLength}
               placeholder={placeholder}
-              className={
-                !inputBlur
-                  ? `mt-1 block w-full rounded-md border-gray-300 shadow-sm placeholder:text-darkBlue/40 focus:border-indigo-500 focus:ring-indigo-500 sm:text-md transition-all duration-200 py-3 text-darkBlue`
-                  : `mt-1 block w-full rounded-md border-red-400 shadow-sm placeholder:text-red-200 bg-red-50/40 focus:border-red-500 focus:ring-red-500 sm:text-md transition-all duration-200 py-3`
-              }
+              className="mt-1 border-[#DBD3FF] shadow-sm  text-[#7B70AF] placeholder:text-[#978EC2] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#978EC2]c
+                   block w-full rounded-md sm:text-md transition-all duration-200"
+              
             />
             {hasShowPassword === "disable" ? (
               ""
@@ -101,12 +86,6 @@ export default function Input({
             ) : (
               ""
             )}
-            {/* <span></span> */}
-            {inputBlur && (
-              <span className="mt-1 text-xs text-red-400 absolute transition-all duration-200">
-                This field is required
-              </span>
-            )}
           </div>
         </>
       ) : field === "textarea" ? (
@@ -124,7 +103,7 @@ export default function Input({
           >
             <label
               htmlFor={name}
-              className="block text-base font-normal text-[#7B70AF]"
+              className="block text-base text-[#7B70AF]"
             >
               {label}{" "}
               <span className="mt-2 text-sm text-red-400">{optionalLabel}</span>
@@ -133,17 +112,11 @@ export default function Input({
               <textarea
                 id={name}
                 name={name}
-                value={value}
                 onChange={onChange}
-                onBlur={handleBlur}
-                rows={3}
+                rows={6}
+                value={value}
                 placeholder={placeholder}
-                className={
-                  !inputBlur
-                    ? `mt-1 block w-full rounded-md border-gray-300 shadow-sm resize-none placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-gray-700`
-                    : `mt-1 block w-full rounded-md border-red-400 shadow-sm placeholder:text-red-200 bg-red-50/40 focus:border-red-500 focus:ring-red-500 sm:text-sm`
-                }
-                defaultValue={""}
+                className="mt-1 border-[#DBD3FF] shadow-sm placeholder:text-[#978EC2] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#978EC2] block w-full rounded-md sm:text-md transition-all duration-200"
               />
             </div>
           </div>

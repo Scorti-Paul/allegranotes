@@ -1,20 +1,18 @@
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 interface Props {
-  label: string;
   onClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-function AddButton({ label, onClick }: Props) {
+function AddButton({ onClick }: Props) {
   return (
     <div className="transition-all ease-in-out delay-150 duration-700">
       <button
         onClick={onClick}
-        className={`flex rounded-lg  items-center gap-3 bg-green-600 text-white p-3`}
+        className={`transition-all ease-in-out delay-150 duration-500 w-12 h-12 flex justify-center items-center bg-indigo-500 text-white rounded-full`}
       >
-        <span className={`text-sm`}>{label}</span>
         <span>
-          <PlusCircleIcon className="w-6" />
+          <PlusIcon className="w-6 text-white rounded-full" />
         </span>
       </button>
     </div>

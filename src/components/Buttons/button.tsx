@@ -23,62 +23,21 @@ const Button = ({
               onClick={onClick}
               className={`inline-flex w-full justify-center font-medium rounded-md border-0 border-transparent ${disabled
                 ? "text-gray-600 bg-gray-200 cursor-not-allowed"
-                : "bg-[#313860] text-white shadow-sm hover:bg-[#313860]"
-                } focus:outline-none sm:col-start-2 sm:text-base transition-all duration-200 px-2 py-4 text-sm ${children}`}
+                : "bg-indigo-600 text-white shadow-sm hover:bg-indigo-600"
+                } focus:outline-none sm:col-start-2 sm:text-base transition-all duration-200 px-4 py-3 text-sm ${children}`}
             >
               <div className="flex gap-2 items-center justify-center">
                 {loading && <Loader />}
 
-                {hasIcon && <>{Icon}</>}
                 <span>{text}</span>
+                {hasIcon && <>{Icon}</>}
               </div>
             </button>
-          </>
-        ) : type === "secondary-btn" ? (
-          <>
-            <div>
-              <button
-                disabled={disabled}
-                onClick={onClick}
-                ref={ref}
-                className="inline-flex w-full justify-center rounded-md border-2 border-primary-500 bg-white px-4 py-3 text-base font-medium transition-all duration-200 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:col-start-2 sm:mt-0 sm:text-sm"
-              >
-                <div className="flex gap-2 items-center justify-center">
-                  {loading && <Loader />}
-                  <span>{text}</span>
-                  {hasIcon && <>{Icon}</>}
-                </div>
-              </button>
-            </div>
-          </>
-        ) : type === "primary-link" ? (
-          <>
-            <div>
-              <Link to={`${path}`} className='inline-flex w-full justify-center rounded-xl border-[2.5px] border-primary-500 px-4 py-3 transition-all duration-200 bg-primary-500 text-white text-sm font-medium hover:border-primary-600 hover:bg-primary-600 focus:outline-none focus:ring-primary-500 focus:ring-offset-2 sm:col-start-2 sm:mt-0 sm:text-sm'>
-                <div className="flex gap-2 items-center justify-center">
-                  {loading && <Loader />}
-                  {hasIcon && <>{Icon}</>}
-                  <span>{text}</span>
-                </div>
-              </Link>
-            </div>
-          </>
-          ) : type === "primary-link-large" ? (
-            <>
-            <div>
-              <Link to={`${path}`} className='inline-flex w-full justify-center rounded-xl border-[2.5px] border-primary-500 px-4 py-4 transition-all duration-200 bg-primary-500 text-white text-sm font-medium hover:border-primary-600 hover:bg-primary-600 focus:outline-none focus:ring-primary-500 focus:ring-offset-2 sm:col-start-2 sm:mt-0 sm:text-lg'>
-                <div className="flex gap-2 items-center justify-center">
-                  {loading && <Loader />}
-                  <span>{text}</span>
-                  {hasIcon && <>{Icon}</>}
-                </div>
-              </Link>
-            </div>
           </>
         ) : type === "secondary-link" ? (
           <>
             <div>
-              <Link to={`${path}`} className="inline-flex w-full justify-center rounded-xl border-2 border-primary-500 px-4 py-3 transition-all duration-200 bg-white text-primary-500 hover:bg-primary-500 hover:text-white text-sm font-medium focus:outline-none focus:ring-primary-500 focus:ring-offset-2 sm:col-start-2 sm:mt-0 sm:text-sm">
+              <Link to={`${path}`} className="inline-flex w-full justify-center px-4 py-3 transition-all duration-200 text-primary-500 hover:bg-primary-500 hover:text-white text-sm font-medium focus:outline-none focus:ring-primary-500 focus:ring-offset-2 sm:col-start-2 sm:mt-0 sm:text-sm">
                 <div className="flex gap-2 items-center justify-center">
                   {loading && <Loader />}
                   {hasIcon && <>{Icon}</>}

@@ -44,10 +44,10 @@ export default function CreateCategory({
       show={show}
       setShow={setShow}
       modalTitle="Create Category"
-      modalDesc="Add new category to add to products and service to enable filter"
+      modalDesc="Create new category to list with notes"
       size={2}
     >
-      <div className="flex h-full">
+      <div className="flex h-full mt-5">
         <div className="flex min-w-0 flex-1 flex-col ">
           <div className="relative z-0 flex flex-1 ">
             <form
@@ -56,16 +56,16 @@ export default function CreateCategory({
             >
               {/* Breadcrumb */}
               <label className="block text-sm font-medium text-gray-700">
-                Category Name
+                Name
               </label>
               <input
                 id="name"
                 {...register("name", { required: true })}
-                placeholder="Eg. Vegetables"
+                placeholder="Enter category name"
                 className={` ${
                   errors?.name
                     ? "focus:border-rose-500 focus:ring-rose-500"
-                    : "focus:border-green-500 focus:ring-green-500"
+                    : "focus:border-indigo-500 focus:ring-indigo-500"
                 } mt-2 block w-full text-black rounded-md border-gray-300 shadow-sm py-3 placeholder:text-gray-400  sm:text-sm`}
                 type="text"
               />
@@ -80,7 +80,7 @@ export default function CreateCategory({
               <div className=" pt-4 flex flex-row-reverse mt-2">
                 <button
                   type="submit"
-                  className="text-white flex items-center gap-2 bg-green-600 px-4 py-3 rounded-lg"
+                  className="text-white flex items-center gap-2 bg-indigo-600 px-4 py-3 rounded-lg"
                 >
                   <span>Submit</span>
                   {loading ? (

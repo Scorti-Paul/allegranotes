@@ -6,7 +6,7 @@ export default function ViewNote({
   show,
   setShow,
 }: any) {
-    
+   
   return (
     <Modal
       show={show}

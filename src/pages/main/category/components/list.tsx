@@ -1,4 +1,5 @@
-import { GiftIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { GiftIcon,  } from "@heroicons/react/24/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteCategory } from "api/mutations/category";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -29,15 +30,15 @@ export default function List({ data }: any) {
       {category?.map((item: any) => (
         <div
           key={item._id}
-          className="relative cat-card flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400"
+          className="relative cat-card flex items-center space-x-3 rounded-lg border border-indigo-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-indigo-400"
         >
           <div className="flex-shrink-0">
-            <GiftIcon className="h-10 w-10" />
+            <GiftIcon className="h-10 w-10 text-indigo-500" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="focus:outline-none">
               {/* <span className="absolute inset-0" aria-hidden="true" /> */}
-              <p className="text-sm font-medium text-gray-900">{item.name}</p>
+              <p className="text-sm font-medium text-indigo-900">{item.name}</p>
             </div>
           </div>
           <div className="remove-btn cursor-pointer" onClick={() => invokeDeleteCategory(item._id)}>
