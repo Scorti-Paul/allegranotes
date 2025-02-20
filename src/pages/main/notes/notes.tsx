@@ -106,11 +106,10 @@ const Notes: FC<{}> = () => {
                 <div className="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                   <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
                     <div className="overflow-hidden md:rounded-lg p-1">
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                         {
                           note?.map((note: any, idx: any) => (
-                            <div key={idx} className="border border-indigo-100 p-6 bg-white rounded-xl">
+                            <div key={idx} className="border border-indigo-100 p-6 bg-white rounded-xl min-w-36">
                               <div className="mb-5 flex justify-between">
                                 <BriefcaseIcon className="w-12 text-indigo-400 border-[0.005rem] border-indigo-400 p-2 rounded-2xl" />
                                 <div className="flex">

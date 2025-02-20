@@ -175,7 +175,7 @@ export default function Layout() {
           </div>
         </div>
         <div className="flex flex-1 flex-col md:pl-64 bg-[#F8F9FA] h-screen">
-          <div className="sticky flex justify-between items-center top-0 z-10 bg-[#F8F9FA] pl-1 pt-1 sm:pl-3 sm:pt-3 md:hidden">
+          <div className="sticky flex justify-between items-center top-0 z-10 bg-[#F8F9FA] pl-3 pr-5 pt-1 sm:pl-3 sm:pt-3 md:hidden">
             <button
               type="button"
               className="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-indigo-500 hover:text-indigo-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -186,7 +186,7 @@ export default function Layout() {
             </button>
 
             <div className="flex md:hidden">
-              <div className="text-base  font-medium text-indigo-500 transition-all p-2 rounded-full duration-300 hover:text-indigo-600  hover:cursor-pointer">
+              <div className="text-base font-medium text-indigo-500 transition-all p-2 rounded-full duration-300 hover:text-indigo-600  hover:cursor-pointer">
                 <UserIcon className="w-6" />
               </div>
               <button className="text-base font-medium text-indigo-500 transition-all p-2 rounded-full duration-300 hover:text-indigo-600  hover:cursor-pointer">
