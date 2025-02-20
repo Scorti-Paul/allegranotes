@@ -1,9 +1,6 @@
 import { FC } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LoginPage from "pages/auth/login";
-import Register from "../pages/auth/register";
 import Layout from "./layout";
-// import UserProfile from "pages/main/users/components/userprofile";
 import Notes from "pages/main/notes";
 import PageNotFound from "pages/pagenotfound";
 import Category from "pages/main/category/category";
@@ -40,23 +37,7 @@ const router = createBrowserRouter([
         path: "/notes/update-note",
         element: <UpdateNote />,
       },
-      // {
-      //   path: "users/user/profile",
-      //   element: <UserProfile />,
-      // },
-      // {
-      //   path: "settings",
-      //   element: <Settings />,
-      // },
     ],
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
   },
   {
     path: "*",
