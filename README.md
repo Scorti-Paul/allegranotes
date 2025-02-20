@@ -1,70 +1,192 @@
-# Getting Started with Create React App
+![logo](https://allegranotes.vercel.app/logo.png)  
+<br />
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Project Documentation
 
-## Available Scripts
+### Table of Content
+- Project Overview
+- Backend Installation & Setup
+- Backend Folder Structure 
+- Backend Core Features
+- Frontend Installation & Setup
+- Frontend Folder Structure 
+- Core Features
+- Tech Stack
+- API Documentation
+- Future Improvements
+- Others
 
-In the project directory, you can run:
+## 1. Project Overview
+A basic note-taking application that allows users to **create**, **view**, **edit**, and **delete** notes.
 
-### `yarn start`
+#### Live Site
+[Visit Live Site](https://allegranotes.vercel.app)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### UI/UX Design
+[Link To Prototype](https://www.figma.com/proto/HrX5Wfv1HG6KQIpwD57PVB/Allergo---Notes?node-id=0-1&t=NfmqdhGrwc8WSO65-1)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 2. Backend Installation & Setup
 
-### `yarn test`
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm or yarn
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Setup Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Scorti-Paul/allegronotes-engine.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd allegronotes-engine
+   ```
+3. Create .env file:
+   ```sh
+   PORT=3500
+   MONGODB_URI=mongodb+srv://scortip:devers45@cluster0.cmotr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+   APP_SECRET=ALIWks92kl2kS4sYua91ak2178AsJk12
+   ```
+4. Install dependencies:
+   ```sh
+   npm install  
+   # OR
+   yarn install
+   ```
+5. Start the development server:
+   ```sh
+   tsc -w
+   npm run dev
+   # OR
+   tsc -w
+   yarn dev
+   ```
+6. Start the development server:
+   ```sh
+   npm run dev
+   # OR
+   yarn dev
+   ```
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 3. Backend Folder Structure
+```
+project-folder/
+│── src/
+│   ├── controllers/    # Process Client Requests
+│   ├── database/       # Connect MongoDB & Create Schemas
+│   ├── routes/         # Setup Endpoint
+│   ├── index.ts/       # Entry Point
+│── .gitignore
+│── package.json
+│── README.md
+│── tsconfig.json
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 3. Frontend Installation & Setup
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Prerequisites
+- Node.js (v16+ recommended)
+- npm or yarn
 
-### `yarn eject`
+### Setup Steps
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Scorti-Paul/allegranotes.git
+   ```
+2. Navigate to the project directory:
+   ```sh
+   cd allegranotes
+   ```
+3. Create .env file:
+   ```sh
+   REACT_APP_URL=https://engine-lx5g.onrender.com/api
+   ```
+4. Install dependencies:
+   ```sh
+   npm install  
+   # OR
+   yarn install
+   ```
+5. Start the development server:
+   ```sh
+   npm run dev
+   # OR
+   yarn dev
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 3. Frontend Folder Structure
+```
+project-folder/
+│── src/
+│   ├── api/              # API request functions
+│   ├── assets/           # API request functions
+│   ├── components/       # Reusable UI components
+│   ├── navigator/        # Routes
+│   ├── pages/            # Page components
+│   ├── utils/            # Helper functions
+│   ├── index.css         # Global styles
+│   ├── App.tsx           # Main application file
+│   ├── index.tsx         # Entry point
+│── public/
+│── .gitignore
+│── package.json
+│── README.md
+│── tailwind.config.js
+│── tsconfig.json
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. Core Features
+- **Notes Management**: Create, view, update, and delete notes
+- **Categories & Tags**: Assign categories and tags to notes
+- **Error Handling**: Implemented with an **Error Boundary**
+- **State Management**: React state + React Query for async data fetching
+- **Custom Styling**: Tailwind CSS and react-select custom styles
+- **API Integration**: Axios for API requests
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 5. Tech Stack
+- **API**: RESTful 
+- **Database**: MongoDB - Mongoose
+- **Backend**: NodeJS
+- **Frontend**: React + TypeScript
+- **State Management**: React Query
+- **Styling**: Tailwind CSS
+- **Routing**: React Router
+- **API Calls**: Axios
+- **Error Handling**: React Error Boundaries
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 6. API Documentation
+Deployed API on Render: https://engine-lx5g.onrender.com/api
 
-## Learn More
+***Examples:***   
+  Full Link to get all Notes: https://engine-lx5g.onrender.com/api/notes
+### Endpoints
+---
+| Method | Endpoint          | Description           |
+|--------|-------------------|-----------------------|
+| GET    | /notes            | Get all notes         |
+| GET    | /notes/:id        | Get a note            |
+| POST   | /note             | Create a new note     |
+| PUT    | /note/:id         | Update a new note     |
+| DELETE | /note/:id         | Delete a note         |
+| GET    | /tags             | Get all tags          |
+| DELETE | /tag/:id          | Delete a tag          |
+| GET    | /categories       | Get all category      |
+| DELETE | /category/:id     | Delete a tag          |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 8. Others
 
-### Code Splitting
+#### Shortcuts
+A starter project I built to efficiently bootstrap new projects with essential features pre-configured.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+#### Future Improvement
+**Planned Features**
+- User authentication (Sign up, Sign in)
+- User authorization to manage only their notes
+- Note reminders and priority flags  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Potential Enhancements**
+- Dark mode support
+- Offline storage using IndexedDB or PWA
+- Markdown support for rich text editing
