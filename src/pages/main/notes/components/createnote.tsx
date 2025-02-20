@@ -232,11 +232,6 @@ const CreateNote: FC<{}> = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <DoubleButton
-                    loading={isLoading || loading}
-                    buttonText="Save note"
-                    onClick={handleSubmission}
-                  /> */}
                 </div>
               </form>
             </div>
