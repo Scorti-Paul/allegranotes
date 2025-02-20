@@ -5,7 +5,7 @@ export const createNote = async (body: any) => {
 };
 
 export const updateNote = async (id: any, body: any) => {
-  return await put(`notes/${id}`, { ...body });
+  return await put(`note/${id}`, { ...body });
 };
 
 export const singleNote = async (id: any) => {
