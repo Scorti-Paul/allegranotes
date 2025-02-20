@@ -168,6 +168,7 @@ const UpdateNote: FC<{}> = () => {
                           isLoading={isFetchingCategory}
                           isClearable={true}
                           isSearchable={true}
+                          defaultValue={noteData["category"]}
                           onChange={(e: any) => setSelectedCategory(e?.value)}
                           isMulti={false}
                           name="category"
@@ -192,6 +193,7 @@ const UpdateNote: FC<{}> = () => {
                           isLoading={isFetchingTag}
                           isClearable={true}
                           isSearchable={true}
+                          defaultValue={noteData["tag"]}
                           onChange={(e: any) => setSelectedTag(e?.value)}
                           isMulti={false}
                           name="tag"
