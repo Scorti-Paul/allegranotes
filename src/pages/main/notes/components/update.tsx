@@ -1,5 +1,4 @@
 import { FC, useCallback, useEffect } from "react";
-import { EyeIcon } from "@heroicons/react/24/solid";
 import Button from "components/Buttons/button";
 import Input from "components/Inputs";
 import Header from "components/Header";
@@ -10,7 +9,7 @@ import { toast } from "react-toastify";
 import { updateNote } from "api/mutations/notes";
 import { get } from "api";
 import Select from 'react-select'
-import { ArrowDownOnSquareIcon } from "@heroicons/react/24/outline";
+import { ArrowDownOnSquareIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 
 const UpdateNote: FC<{}> = () => {
   const [noteData, setNoteData] = useState<any>("");
@@ -140,11 +139,11 @@ const UpdateNote: FC<{}> = () => {
         <div className="px-4 sm:px-6 lg:px-8">
           <Header
             title="Update Note"
-            description="Fill out the details to update new note."
+            description="Make your necessary changes to update note."
           >
             <Button
-              Icon={<EyeIcon className="w-4" />}
-              text={"Notes"}
+              Icon={<ChevronLeftIcon className="w-4" />}
+              text={"Back"}
               type={"secondary-link"}
               path={"/notes"}
               onClick={() => null}
@@ -156,10 +155,10 @@ const UpdateNote: FC<{}> = () => {
             <div className="mt-5 md:col-span-2 md:mt-0">
               <form onSubmit={handleSubmission}>
                 <div className="overflow-hidden">
-                  <div className="bg-white md:px-16 md:py-12 sm:p-6 sm:block rounded-3xl">
+                  <div className="bg-white md:px-16 md:py-12 p-6 sm:block rounded-md md:rounded-2xl">
                     <div className="w-full grid grid-cols-6 gap-6">
-                      <div className='col-span-3 mt-1'>
-                        <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <div className='col-span-6  md:col-span-3 mt-1'>
+                        <label htmlFor="category" className="block text-base text-[#7B70AF] mb-1.5">
                           Category
                         </label>
                         <Select
@@ -182,8 +181,8 @@ const UpdateNote: FC<{}> = () => {
                         />
                       </div>
 
-                      <div className='col-span-3 mt-1'>
-                        <label htmlFor="tag" className="block text-sm font-medium text-gray-700 mb-1.5">
+                      <div className='col-span-6  md:col-span-3 mt-1'>
+                        <label htmlFor="tag" className="block text-base text-[#7B70AF] mb-1.5">
                           Tag
                         </label>
                         <Select
