@@ -55,7 +55,7 @@ const Notes: FC<{}> = () => {
     (e: React.MouseEvent, idx: number, note: any) => {
       e?.preventDefault();
       setSelected(note[idx])
-      navigate("note/update-note", { state: note });
+      navigate("/update-note", { state: note });
     },
     [navigate]
   );
