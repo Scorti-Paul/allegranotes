@@ -1,7 +1,7 @@
 import { FC, Suspense, useCallback, useEffect, useState } from "react";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import { useQuery } from "react-query";
-import { get } from "../../../api";
+import { useMutation, useQuery } from "react-query";
+import { get, post } from "../../../api";
 import { MoonLoader } from "react-spinners";
 import { BriefcaseIcon, CalendarIcon } from "@heroicons/react/24/solid"
 import moment from "moment";
@@ -12,6 +12,8 @@ import TopLoader from "components/loaders/top";
 import { toast } from "react-toastify";
 import { deleteNote } from "api/mutations/notes";
 import Header from "components/Header";
+import Select from 'react-select'
+import FilterNotes from "./components/filter";
 
 const Notes: FC<{}> = () => {
   const [showModal, setShowModal] = useState(false);
@@ -20,8 +22,18 @@ const Notes: FC<{}> = () => {
   const [note, setNote] = useState([])
   const navigate = useNavigate();
 
-  const { data, isFetching } = useQuery(["noteList"], () =>
-    get("/notes")
+
+  const [showFilter, setShowFilter] = useState(false);
+  const [category, setCategory] = useState<string | null>(null);
+  const [tag, setTag] = useState<string | null>(null);
+  const [filteredNotes, setFilteredNotes] = useState<any[]>([])
+  const { data, isFetching } = useQuery(["noteList", category, tag], () =>
+    get("/notes", {
+      params: {
+        category: category || undefined,
+        tag: tag || undefined,
+      },
+    })
   );
 
   useEffect(() => {
@@ -69,27 +81,35 @@ const Notes: FC<{}> = () => {
             description="A list of all the Notes."
           >
             <div className="flex gap-4 justify-end items-center">
-              <div className="transition-all ease-in-out delay-150 duration-700">
-                <Link
-                  to=""
-                >
-                  <span className="transition-all ease-in-out delay-150 duration-500 w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-indigo-100 text-white rounded-full">
-                    <AdjustmentsHorizontalIcon className="w-4 md:w-6 text-indigo-600 rounded-full" />
-                  </span>
-                </Link>
+              <div className="transition-all ease-in-out delay-150 duration-700 hover:cursor-pointer" onClick={() => setShowFilter(!showFilter)}>
+                <span className="transition-all ease-in-out delay-150 duration-500 w-10 h-10 md:w-12 md:h-12 flex justify-center items-center bg-indigo-100 text-white rounded-full">
+                  <AdjustmentsHorizontalIcon className="w-4 md:w-6 text-indigo-600 rounded-full" />
+                </span>
               </div>
               <div className="transition-all ease-in-out delay-150 duration-700">
                 <Link
-                  to="create-note"
+                  to="/notes/create-note"
                 >
-                  <span className="transition-all ease-in-out delay-150 duration-500 w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-indigo-500 text-white rounded-full">
+                  <span className="transition-all ease-in-out delay-150 duration-500 w-10 h-10 md:w-12 md:h-12 flex justify-center items-center bg-indigo-500 text-white rounded-full">
                     <PlusIcon className="w-4 md:w-6 text-white rounded-full" />
                   </span>
                 </Link>
               </div>
             </div>
           </Header>
-
+          {
+            // Show the filter component if showFilter is true
+            showFilter ? (
+              <FilterNotes
+                category={category}
+                setCategory={setCategory}
+                tag={tag}
+                setTag={setTag}
+                filteredNotes={filteredNotes}
+                setFilteredNotes={setFilteredNotes}
+              />
+            ) : null
+          }
 
           {isFetching ? (
             <div className="h-[30rem] flex justify-center items-center">
