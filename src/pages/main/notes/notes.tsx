@@ -71,7 +71,7 @@ const Notes: FC<{}> = () => {
             <div className="flex gap-4 justify-end items-center">
               <div className="transition-all ease-in-out delay-150 duration-700">
                 <Link
-                  to="create-note"
+                  to=""
                 >
                   <span className="transition-all ease-in-out delay-150 duration-500 w-8 h-8 md:w-12 md:h-12 flex justify-center items-center bg-indigo-100 text-white rounded-full">
                     <AdjustmentsHorizontalIcon className="w-4 md:w-6 text-indigo-600 rounded-full" />
