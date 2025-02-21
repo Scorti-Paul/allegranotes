@@ -47,7 +47,7 @@ export default function List({ data, refetch }: any) {
             className="remove-btn cursor-pointer g-red-200 p-2 rounded-full"
             onClick={() => invokeDeleteTag(item._id)}
           >
-            <TrashIcon className="h-6 w-6 text-red-600 bg-red-100 rounded-full p-1" />
+            <TrashIcon className="h-8  w-8 text-red-500 bg-red-50 rounded-full p-2" />
           </div>
         </div>
       ))}

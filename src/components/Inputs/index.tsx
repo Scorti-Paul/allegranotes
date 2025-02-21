@@ -63,7 +63,7 @@ export default function Input({
               minLength={minLength}
               maxLength={maxLength}
               placeholder={placeholder}
-              className="mt-1 border-[#DBD3FF] shadow-sm  text-[#7B70AF] placeholder:text-[#978EC2] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#978EC2]c
+              className="mt-1 border-[#DBD3FF] shadow-sm  text-[#4F46E5] placeholder:text-[#DBD3FF] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#978EC2]c
                    block w-full rounded-md sm:text-md transition-all duration-200"
               
             />
@@ -116,7 +116,7 @@ export default function Input({
                 rows={6}
                 value={value}
                 placeholder={placeholder}
-                className="mt-1 border-[#DBD3FF] shadow-sm placeholder:text-[#978EC2] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#978EC2] block w-full rounded-md sm:text-md transition-all duration-200"
+                className="mt-1 border-[#DBD3FF] shadow-sm placeholder:text-[#DBD3FF] focus:border-indigo-500 focus:ring-indigo-500 sm:text-md py-3 text-[#4F46E5] block w-full rounded-md sm:text-md transition-all duration-200"
               />
             </div>
           </div>
