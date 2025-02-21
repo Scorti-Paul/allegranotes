@@ -7,7 +7,7 @@ const PageNotFound = () => {
         <div className="h-40 flex items-center">
           <img
             src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
-            alt=""
+            alt="page not found"
           />
         </div>
         <h3 className="text-3xl font-semibold mt-16">Looks like you're lost</h3>
@@ -16,7 +16,7 @@ const PageNotFound = () => {
           wrong.
         </p>
         <Link to="/">
-          <span className="block bg-green-600 px-8 py-3 text-white font-medium mt-4 rounded-md hover:bg-green-700 hover:cursor-pointer transition-all duration-300">
+          <span className="block bg-indigo-600 px-8 py-3 text-white font-medium mt-4 rounded-md hover:bg-indigo-700 hover:cursor-pointer transition-all duration-300">
             Go back to home
           </span>
         </Link>
