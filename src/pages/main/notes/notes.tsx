@@ -1,7 +1,7 @@
 import { FC, Suspense, useCallback, useEffect, useState } from "react";
 import { PlusIcon } from "@heroicons/react/20/solid";
-import { useMutation, useQuery } from "react-query";
-import { get, post } from "../../../api";
+import { useQuery } from "react-query";
+import { get } from "../../../api";
 import { MoonLoader } from "react-spinners";
 import { BriefcaseIcon, CalendarIcon } from "@heroicons/react/24/solid"
 import moment from "moment";
@@ -12,7 +12,6 @@ import TopLoader from "components/loaders/top";
 import { toast } from "react-toastify";
 import { deleteNote } from "api/mutations/notes";
 import Header from "components/Header";
-import Select from 'react-select'
 import FilterNotes from "./components/filter";
 
 const Notes: FC<{}> = () => {
@@ -27,18 +26,15 @@ const Notes: FC<{}> = () => {
   const [category, setCategory] = useState<string | null>(null);
   const [tag, setTag] = useState<string | null>(null);
   const [filteredNotes, setFilteredNotes] = useState<any[]>([])
-  const { data, isFetching } = useQuery(["noteList", category, tag], () =>
-    get("/notes", {
-      params: {
-        category: category || undefined,
-        tag: tag || undefined,
-      },
-    })
+  const { data, isFetching } = useQuery(["noteList"], () =>
+    get("/notes")
   );
+
 
   useEffect(() => {
     setNote(data?.data)
   }, [data])
+
 
   const invokeDeleteNote = (itemId: string) => {
     setLoading(true);
@@ -71,6 +67,7 @@ const Notes: FC<{}> = () => {
     },
     [navigate]
   );
+
 
   return (
     <>
