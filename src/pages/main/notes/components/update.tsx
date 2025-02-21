@@ -9,13 +9,17 @@ import { toast } from "react-toastify";
 import { updateNote } from "api/mutations/notes";
 import { get } from "api";
 import Select from 'react-select'
-import { ArrowDownOnSquareIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import {customStyles} from "../../../../utils"
 
 const UpdateNote: FC<{}> = () => {
+  type OptionType = { value: string; label: string } | null;
+
   const [noteData, setNoteData] = useState<any>("");
   const [, setSearchString] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
-  const [selectedTag, setSelectedTag] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<OptionType>(null);
+  const [selectedTag, setSelectedTag] = useState<OptionType>(null);
 
   const navigate = useNavigate();
 
@@ -40,7 +44,7 @@ const UpdateNote: FC<{}> = () => {
 
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: (body: any) => {
-      return updateNote( state?._id, { ...body });
+      return updateNote(state?._id, { ...body });
     },
     onError: (e) => {
       toast?.error("There was an error");
@@ -66,8 +70,8 @@ const UpdateNote: FC<{}> = () => {
 
       mutateAsync({
         ...noteData,
-        category: selectedCategory,
-        tag: selectedTag,
+        category: selectedCategory?.value,
+        tag: selectedTag?.value,
       })
         ?.then(() => {
           toast?.success("Note updated successfully");
@@ -84,7 +88,6 @@ const UpdateNote: FC<{}> = () => {
   const initialCheck = useCallback(() => {
     if (state) {
       setNoteData({
-        image: state?.image,
         title: state?.title,
         category: state?.category,
         tag: state?.tag,
@@ -97,42 +100,24 @@ const UpdateNote: FC<{}> = () => {
     initialCheck();
   }, [initialCheck]);
 
-  
-  const customStyles = {
-    control: (provided: any, state: any) => ({
-      ...provided,
-      border: state.isFocused ? "2px solid #6366F1" : "1px solid #DBD3FF", 
-      borderRadius: "8px",
-      boxShadow: state.isFocused ? "0 0 5px rgba(99, 102, 241, 0.5)" : "none",
-      "&:hover": {
-        borderColor: "#6366F1",
-      },
-      padding: "6px",
-    }),
-    placeholder: (provided: any) => ({
-      ...provided,
-      color: "#7B70AF", 
-      fontStyle: "italic", 
-    }),
-    option: (provided: any, state: any) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? "#6366F1" : state.isFocused ? "#E0E7FF" : "#ffffff",
-      color: state.isSelected ? "#ffffff" : "#7B70AF",
-      padding: "10px",
-      cursor: "pointer",
-    }),
-    menu: (provided: any) => ({
-      ...provided,
-      borderRadius: "8px",
-      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-      overflow: "hidden",
-    }),
-    singleValue: (provided: any) => ({
-      ...provided,
-      color: "#4F46E5", // Indigo
-    }),
-  };
+  // Populate the default category & tag when noteData is available
+useEffect(() => {
+  if (noteData?.category) {
+    setSelectedCategory({
+      value: noteData.category._id,
+      label: noteData.category.name,
+    });
+  }
 
+  if (noteData?.tag) {
+    setSelectedTag({
+      value: noteData.tag._id,
+      label: noteData.tag.name,
+    });
+  }
+}, [noteData]);
+
+ 
   return (
     <>
       <div className="md:mt-4 md:px-12">
@@ -168,8 +153,8 @@ const UpdateNote: FC<{}> = () => {
                           isLoading={isFetchingCategory}
                           isClearable={true}
                           isSearchable={true}
-                          defaultValue={noteData["category"]}
-                          onChange={(e: any) => setSelectedCategory(e?.value)}
+                          value={selectedCategory}
+                          onChange={(e: any) => setSelectedCategory(e)}
                           isMulti={false}
                           name="category"
                           styles={customStyles}
@@ -193,8 +178,8 @@ const UpdateNote: FC<{}> = () => {
                           isLoading={isFetchingTag}
                           isClearable={true}
                           isSearchable={true}
-                          defaultValue={noteData["tag"]}
-                          onChange={(e: any) => setSelectedTag(e?.value)}
+                          value={selectedTag}
+                          onChange={(e: any) => setSelectedTag(e)}
                           isMulti={false}
                           name="tag"
                           styles={customStyles}
@@ -245,7 +230,7 @@ const UpdateNote: FC<{}> = () => {
                           path=""
                           loading={isLoading}
                           hasIcon={true}
-                          Icon={<ArrowDownOnSquareIcon className="w-6" />}
+                          Icon={<CheckCircleIcon className="w-6" />}
                           onClick={handleSubmission}
                           text={"Update Note"}
                         />
