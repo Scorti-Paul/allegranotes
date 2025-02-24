@@ -4,7 +4,7 @@
 # Project Documentation
 
 ### Table of Content
-- (Project Overview)[#1-project-overview]
+- Project Overview
 - Installation & Setup
 - Folder Structure 
 - Core Features
