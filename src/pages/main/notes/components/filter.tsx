@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import Select from 'react-select'
 import { customStyles } from "utils";
 
-const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFilteredNotes }: any) => {
+const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFilteredNotes, note }: any) => {
   const [, setSearchString] = useState<string>("");
 
   const { data: categoryData, isFetching: isFetchingCategory } = useQuery(
@@ -18,7 +18,7 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
     () => get("/tags")
   );
 
-  const { data } = useQuery(["fNoteList", category, tag], () =>
+  const { data } = useQuery(["filterNoteList", category, tag], () =>
     filterNote(category, tag)
   );
 
@@ -26,16 +26,20 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
   useEffect(() => {
     const fetchFilteredNotes = async () => {
       try {
-        setFilteredNotes(data?.data);
+        if(category || tag) {
+          setFilteredNotes(data?.data);
+        } else {
+          setFilteredNotes(note);
+        }
       } catch (error) {
         console.error("Error fetching notes:", error);
       }
     };
 
     fetchFilteredNotes();
-  }, [category, data?.data, setFilteredNotes, tag]);
+  }, [category, data?.data, note, setFilteredNotes, tag]);
 
-  console.log(filteredNotes);
+  // console.log(filteredNotes);
 
   return (
     <div className="flex justify-end items-center transition-all duration-500 delay-200 ease-in-out">

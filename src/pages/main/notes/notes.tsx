@@ -102,6 +102,7 @@ const Notes: FC<{}> = () => {
                 setCategory={setCategory}
                 tag={tag}
                 setTag={setTag}
+                note={note}
                 filteredNotes={filteredNotes}
                 setFilteredNotes={setFilteredNotes}
               />
