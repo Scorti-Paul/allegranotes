@@ -143,7 +143,7 @@ useEffect(() => {
                   <div className="bg-white md:px-16 md:py-12 p-6 sm:block rounded-md md:rounded-2xl">
                     <div className="w-full grid grid-cols-6 gap-6">
                       <div className='col-span-6  md:col-span-3 mt-1'>
-                        <label htmlFor="category" className="block text-base text-[#7B70AF] mb-1.5">
+                        <label htmlFor="category" className="block text-sm font-medium text-[#222] mb-1.5">
                           Category
                         </label>
                         <Select
@@ -168,7 +168,7 @@ useEffect(() => {
                       </div>
 
                       <div className='col-span-6  md:col-span-3 mt-1'>
-                        <label htmlFor="tag" className="block text-base text-[#7B70AF] mb-1.5">
+                        <label htmlFor="tag" className="block text-sm font-medium text-[#222] mb-1.5">
                           Tag
                         </label>
                         <Select

@@ -17,7 +17,7 @@ export const customStyles = {
   option: (provided: any, state: any) => ({
     ...provided,
     backgroundColor: state.isSelected ? "#6366F1" : state.isFocused ? "#E0E7FF" : "#ffffff",
-    color: state.isSelected ? "#ffffff" : "#7B70AF",
+    color: state.isSelected ? "#ffffff" : "#434343",
     padding: "10px",
     cursor: "pointer",
   }),
@@ -29,6 +29,6 @@ export const customStyles = {
   }),
   singleValue: (provided: any) => ({
     ...provided,
-    color: "#4F46E5", 
+    color: "#434343", 
   }),
 };
