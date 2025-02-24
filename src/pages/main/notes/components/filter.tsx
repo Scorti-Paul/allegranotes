@@ -1,8 +1,10 @@
+import { XCircleIcon } from "@heroicons/react/24/outline";
 import { get } from "api";
 import { filterNote } from "api/mutations/notes";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import Select from 'react-select'
+import { toast } from "react-toastify";
 import { customStyles } from "utils";
 
 const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFilteredNotes, note }: any) => {
@@ -22,28 +24,30 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
     filterNote(category, tag)
   );
 
-
   useEffect(() => {
     const fetchFilteredNotes = async () => {
       try {
-        if(category || tag) {
+        if (category || tag) {
           setFilteredNotes(data?.data);
         } else {
           setFilteredNotes(note);
         }
       } catch (error) {
-        console.error("Error fetching notes:", error);
+        toast.error("Error fetching notes. Clear options and try again");
       }
     };
 
     fetchFilteredNotes();
   }, [category, data?.data, note, setFilteredNotes, tag]);
 
-  // console.log(filteredNotes);
+  const handleClear = (e: any) => {
+    e.preventDefault()
+    setCategory(null)
+    setTag(null)
+  }
 
   return (
     <div className="flex justify-end items-center transition-all duration-500 delay-200 ease-in-out">
-
       <div className="w-full sm:flex justify-end items-end gap-6">
         <div className='col-span-2  md:col-span-1 mt-1'>
           <Select
@@ -67,7 +71,7 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
           />
         </div>
 
-        <div className='col-span-6  md:col-span-1 mt-1'>
+        <div className='col-span-2 md:col-span-1 mt-1'>
           <Select
             onInputChange={(e) => setSearchString(e)}
             className="basic-single"
@@ -88,6 +92,15 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
             })}
           />
         </div>
+          <div className="pt-4 flex flex-row-reverse mt-2" onClick={(e) => handleClear(e)}>
+            <button
+              type="submit"
+              className=" flex items-center gap-2 text-indigo-400 hover:text-indigo-500 transition-all duration-300 delay-200 ease-in-out px-4 py-3 rounded-lg"
+            >
+              <span>Clear</span>
+              <XCircleIcon className="h-5 w-5 text-indigo-400" />
+            </button>
+          </div>
       </div>
     </div>
   );
