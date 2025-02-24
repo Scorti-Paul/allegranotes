@@ -11,15 +11,12 @@ import { get } from "api";
 import Select from 'react-select'
 import { ArrowUpTrayIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { customStyles } from "../../../../utils"
-import  ReactQuill  from "react-quill";
-import 'react-quill/dist/quill.snow.css';
 
 const CreateNote: FC<{}> = () => {
   const [noteData, setNoteData] = useState<any>("");
   const [, setSearchString] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [selectedTag, setSelectedTag] = useState<string[]>([]);
-  const [qContent, setQContent] = useState('')
 
   const navigate = useNavigate();
 
@@ -108,7 +105,6 @@ const CreateNote: FC<{}> = () => {
                   <div className="bg-white md:px-16 md:py-12 p-6 sm:block rounded-md md:rounded-2xl">
                     <div className="w-full grid grid-cols-6 gap-6">
                       <div className='col-span-6  md:col-span-3 mt-1'>
-                        <ReactQuill value={qContent} onChange={setQContent} theme="snow" />
                         <label htmlFor="category" className="block text-base text-[#7B70AF] mb-1.5">
                           Category
                         </label>
