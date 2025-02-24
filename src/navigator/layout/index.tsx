@@ -13,6 +13,7 @@ import {
 import { Link, Outlet, useLocation } from "react-router-dom";
 import Logo from "assets/Logo";
 import NavHr from "assets/navhr";
+import ErrorBoundary from "components/ErrorBoundary";
 
 const navigation = [
   {
@@ -228,7 +229,9 @@ export default function Layout() {
               </div>
             </div>
             <div className="px-4 md:px-0 py-6 ">
-              <Outlet />
+              <ErrorBoundary>
+                <Outlet />
+              </ErrorBoundary>
             </div>
           </main>
         </div>
