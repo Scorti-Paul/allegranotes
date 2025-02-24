@@ -25,15 +25,18 @@ const Notes: FC<{}> = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [category, setCategory] = useState<string | null>(null);
   const [tag, setTag] = useState<string | null>(null);
-  const [filteredNotes, setFilteredNotes] = useState<any[]>([])
+  const [filteredNotes, setFilteredNotes] = useState([])
   const { data, isFetching } = useQuery(["noteList"], () =>
     get("/notes")
   );
 
 
   useEffect(() => {
-    setNote(data?.data)
-  }, [data])
+    filteredNotes && filteredNotes.length > 0 ?
+      setNote(filteredNotes)
+      :
+      setNote(data?.data)
+  }, [data, filteredNotes])
 
 
   const invokeDeleteNote = (itemId: string) => {
