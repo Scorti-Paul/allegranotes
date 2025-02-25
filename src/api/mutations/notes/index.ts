@@ -13,7 +13,10 @@ export const singleNote = async (id: any) => {
 };
 
 export const filterNote = async (category: any, tag: any) => {
-  return await get(`notes/filter/${category}/${tag}`);
+  let url = 'notes/filter'
+  if (category) url += `/${category}`
+  if (tag) url += `/${tag}`
+  return await get(url);
 };
 
 export const deleteNote = async (id: any) => {
