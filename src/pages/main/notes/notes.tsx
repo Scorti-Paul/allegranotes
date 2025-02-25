@@ -106,8 +106,8 @@ const Notes: FC<{}> = () => {
                 tag={tag}
                 setTag={setTag}
                 note={note}
-                filteredNotes={filteredNotes}
                 setFilteredNotes={setFilteredNotes}
+                setShowFilter={setShowFilter}
               />
             ) : null
           }

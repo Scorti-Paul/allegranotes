@@ -7,7 +7,7 @@ import Select from 'react-select'
 import { toast } from "react-toastify";
 import { customStyles } from "utils";
 
-const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFilteredNotes, note }: any) => {
+const FilterNotes = ({ category, setCategory, tag, setTag, setFilteredNotes, note, setShowFilter }: any) => {
   const [, setSearchString] = useState<string>("");
 
   const { data: categoryData, isFetching: isFetchingCategory } = useQuery(
@@ -40,10 +40,11 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
     fetchFilteredNotes();
   }, [category, data?.data, note, setFilteredNotes, tag]);
 
-  const handleClear = (e: any) => {
-    e.preventDefault()
+  const handleClear = () => {
     setCategory(null)
     setTag(null)
+    setFilteredNotes([])
+    setShowFilter(false)
   }
 
   return (
@@ -92,7 +93,7 @@ const FilterNotes = ({ category, setCategory, tag, setTag, filteredNotes, setFil
             })}
           />
         </div>
-          <div className="pt-4 flex flex-row-reverse mt-2" onClick={(e) => handleClear(e)}>
+          <div className="pt-4 flex flex-row-reverse mt-2" onClick={handleClear}>
             <button
               type="submit"
               className=" flex items-center gap-2 text-indigo-400 hover:text-indigo-500 transition-all duration-300 delay-200 ease-in-out px-4 py-3 rounded-lg"
